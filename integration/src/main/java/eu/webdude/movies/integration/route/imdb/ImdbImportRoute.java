@@ -30,7 +30,7 @@ public abstract class ImdbImportRoute extends RouteBuilder {
 			.choice()
 			.when(simple("${property.CamelSplitIndex} > 0"))
 			.unmarshal(bindyFormat)
-			.aggregate(constant(true), aggregationStrategy).completionSize(100).completionTimeout(2000)
+			.aggregate(constant(true), aggregationStrategy).completionSize(1000).completionTimeout(2000)
 			.bean(getDestination());
 	}
 }

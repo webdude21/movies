@@ -2,6 +2,7 @@ package eu.webdude.movies.integration.dto.imdb;
 
 import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
 import org.apache.camel.dataformat.bindy.annotation.DataField;
+import org.apache.commons.lang3.StringUtils;
 
 @CsvRecord(separator = "\t")
 public class PersonInfoDTO {
@@ -56,8 +57,8 @@ public class PersonInfoDTO {
 		this.deathYear = deathYear;
 	}
 
-	public String getPrimaryProfession() {
-		return primaryProfession;
+	public String[] getPrimaryProfessions() {
+		return StringUtils.split(primaryProfession, ",");
 	}
 
 	public void setPrimaryProfession(String primaryProfession) {

@@ -1,17 +1,18 @@
 package eu.webdude.movies.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "person")
-public class Person {
+public class Person extends RemoteReferencedModel {
+
+	static final String ID_NAME = "person_id";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = ID_NAME)
 	private Long id;
-
-	@Column(name = "import_foreign_key")
-	private String importForeignKey;
 
 	@Column(name = "full_name")
 	private String fullName;
@@ -22,15 +23,24 @@ public class Person {
 	@Column(name = "death_year")
 	private String deathYear;
 
-	@Column(name = "profession")
-	private String profession;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "person_profession", joinColumns = @JoinColumn(name = ID_NAME), inverseJoinColumns = @JoinColumn(name = Profession.ID_NAME))
+	private Set<Profession> professions = new HashSet<>();
 
-	public String getImportForeignKey() {
-		return importForeignKey;
+	public static String getIdName() {
+		return ID_NAME;
 	}
 
-	public void setImportForeignKey(String importForeignKey) {
-		this.importForeignKey = importForeignKey;
+	public Set<Profession> getProfessions() {
+		return professions;
+	}
+
+	public void setProfessions(Set<Profession> professions) {
+		this.professions = professions;
+	}
+
+	public void addProfession(Profession profession) {
+		professions.add(profession);
 	}
 
 	public String getFullName() {
@@ -55,14 +65,6 @@ public class Person {
 
 	public void setDeathYear(String deathYear) {
 		this.deathYear = deathYear;
-	}
-
-	public String getProfession() {
-		return profession;
-	}
-
-	public void setProfession(String profession) {
-		this.profession = profession;
 	}
 
 	public Long getId() {
