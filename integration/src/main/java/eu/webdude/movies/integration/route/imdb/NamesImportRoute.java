@@ -9,12 +9,17 @@ import org.springframework.stereotype.Component;
 public class NamesImportRoute extends ImdbImportRoute {
 
 	@Override
-	String getDownloadURI() {
-		return BASE_DOWNLOAD_URI + "/name.basics.tsv.gz";
+	String getDownloadFileName() {
+		return "name.basics.tsv.gz";
 	}
 
 	@Override
-	String getDestination() {
+	String getSourceComponent() {
+		return "direct:import-data";
+	}
+
+	@Override
+	String getDestinationBean() {
 		return "imdbNameImportProcessor";
 	}
 
