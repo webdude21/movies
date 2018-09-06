@@ -1,12 +1,22 @@
 package eu.webdude.movies.integration.route.imdb;
 
 import eu.webdude.movies.integration.dto.imdb.PersonInfoDTO;
+import eu.webdude.movies.model.repository.PersonRepository;
+import org.apache.camel.Processor;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.spi.DataFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NamesImportRoute extends ImdbImportRoute {
+public class PeopleImportRoute extends ImdbImportRoute {
+
+	private final PersonRepository repository;
+
+	@Autowired
+	public PeopleImportRoute(PersonRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	String getDownloadFileName() {
@@ -26,5 +36,10 @@ public class NamesImportRoute extends ImdbImportRoute {
 	@Override
 	DataFormat getOutputFormat() {
 		return new BindyCsvDataFormat(PersonInfoDTO.class);
+	}
+
+	@Override
+	Processor preImportHook() {
+		return exchange -> repository.deleteAll();
 	}
 }
