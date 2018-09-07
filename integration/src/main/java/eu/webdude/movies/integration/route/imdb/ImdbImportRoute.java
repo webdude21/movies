@@ -4,8 +4,12 @@ import eu.webdude.movies.integration.aggregator.ArrayListAggregationStrategy;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.DataFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class ImdbImportRoute extends RouteBuilder {
+
+	private Logger logger = LoggerFactory.getLogger(ImportJmsRoute.class);
 
 	private static final String BASE_DOWNLOAD_URI = "http4://datasets.imdbws.com/";
 
@@ -18,8 +22,7 @@ public abstract class ImdbImportRoute extends RouteBuilder {
 	abstract DataFormat getOutputFormat();
 
 	Processor preImportHook() {
-		return exchange -> {
-		};
+		return exchange -> logger.info("Running pre import hook!");
 	}
 
 	@Override
