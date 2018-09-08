@@ -1,4 +1,4 @@
-package eu.webdude.movies.web.controller;
+package eu.webdude.movies.web.rest;
 
 import eu.webdude.movies.web.service.IntegrationService;
 import org.springframework.beans.factory.annotation.Autowired;
