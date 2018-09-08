@@ -7,7 +7,7 @@ import eu.webdude.movies.model.repository.PersonRepository;
 import eu.webdude.movies.model.repository.ProfessionRepository;
 import org.apache.camel.Handler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@Component("imdbNameImportProcessor")
-public class NameImportProcessor {
+@Service("nameImportService")
+public class NameImportService {
 
 	private PersonRepository personRepository;
 
 	private ProfessionRepository professionRepository;
 
 	@Autowired
-	public NameImportProcessor(PersonRepository personRepository, ProfessionRepository professionRepository) {
+	public NameImportService(PersonRepository personRepository, ProfessionRepository professionRepository) {
 		this.personRepository = personRepository;
 		this.professionRepository = professionRepository;
 	}

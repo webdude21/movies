@@ -37,7 +37,7 @@ public class PeopleImportRoute extends ImdbImportRoute {
 
 	@Override
 	String getDestinationBean() {
-		return "imdbNameImportProcessor";
+		return "nameImportService";
 	}
 
 	@Override

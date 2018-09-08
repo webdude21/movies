@@ -12,5 +12,4 @@ public class IntegrationApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
