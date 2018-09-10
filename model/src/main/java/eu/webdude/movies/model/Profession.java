@@ -23,10 +23,7 @@ public class Profession extends BaseModel {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "person_profession", joinColumns = @JoinColumn(name = ID_NAME), inverseJoinColumns = @JoinColumn(name = Person.ID_NAME))
-	private Set<Person> profession = new HashSet<>();
-
-	public Profession() {
-	}
+	private Set<Person> people = new HashSet<>();
 
 	public Profession(String name) {
 		this.name = name;
@@ -48,12 +45,12 @@ public class Profession extends BaseModel {
 		this.name = name;
 	}
 
-	public Set<Person> getProfession() {
-		return profession;
+	public Set<Person> getPeople() {
+		return people;
 	}
 
-	public void setProfession(Set<Person> profession) {
-		this.profession = profession;
+	public void setPeople(Set<Person> people) {
+		this.people = people;
 	}
 
 	@Override
