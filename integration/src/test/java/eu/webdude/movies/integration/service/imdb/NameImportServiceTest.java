@@ -1,4 +1,4 @@
-package eu.webdude.movies.integration.processor.imdb;
+package eu.webdude.movies.integration.service.imdb;
 
 import eu.webdude.movies.integration.dto.imdb.PersonInfoDTO;
 import eu.webdude.movies.model.Person;

@@ -1,4 +1,4 @@
-package eu.webdude.movies.integration.processor.imdb;
+package eu.webdude.movies.integration.service.imdb;
 
 import eu.webdude.movies.integration.dto.imdb.PersonInfoDTO;
 import eu.webdude.movies.model.Person;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
