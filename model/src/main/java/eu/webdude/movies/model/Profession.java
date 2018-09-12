@@ -29,6 +29,9 @@ public class Profession extends BaseModel {
 		this.name = name;
 	}
 
+	public Profession() {
+	}
+
 	public Long getId() {
 		return id;
 	}
