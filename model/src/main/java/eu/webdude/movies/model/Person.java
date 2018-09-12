@@ -23,7 +23,7 @@ public class Person extends RemoteReferencedModel {
 	@Column(name = "death_year")
 	private String deathYear;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "person_profession", joinColumns = @JoinColumn(name = ID_NAME), inverseJoinColumns = @JoinColumn(name = Profession.ID_NAME))
 	private Set<Profession> professions = new HashSet<>();
 
