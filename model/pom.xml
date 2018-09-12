@@ -13,7 +13,7 @@
         <groupId>eu.webdude.movies</groupId>
         <artifactId>movies</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath/>
     </parent>
 
     <properties>
