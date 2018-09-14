@@ -1,6 +1,6 @@
-package eu.webdude.movies.integration.route.imdb;
+package eu.webdude.movies.integration.imdbimport.route;
 
-import eu.webdude.movies.integration.dto.imdb.PersonInfoDTO;
+import eu.webdude.movies.integration.imdbimport.dto.PersonInfoDTO;
 import eu.webdude.movies.model.repository.PersonRepository;
 import org.apache.camel.Processor;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;

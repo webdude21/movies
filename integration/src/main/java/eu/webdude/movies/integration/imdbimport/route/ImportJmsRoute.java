@@ -1,4 +1,4 @@
-package eu.webdude.movies.integration.route.imdb;
+package eu.webdude.movies.integration.imdbimport.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;

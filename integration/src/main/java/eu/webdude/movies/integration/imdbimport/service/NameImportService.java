@@ -1,6 +1,6 @@
-package eu.webdude.movies.integration.service.imdb;
+package eu.webdude.movies.integration.imdbimport.service;
 
-import eu.webdude.movies.integration.dto.imdb.PersonInfoDTO;
+import eu.webdude.movies.integration.imdbimport.dto.PersonInfoDTO;
 import eu.webdude.movies.model.Person;
 import eu.webdude.movies.model.Profession;
 import eu.webdude.movies.model.repository.PersonRepository;

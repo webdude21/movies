@@ -1,4 +1,4 @@
-package eu.webdude.movies.integration.dto.imdb;
+package eu.webdude.movies.integration.imdbimport.dto;
 
 import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
 import org.apache.camel.dataformat.bindy.annotation.DataField;

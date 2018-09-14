@@ -1,4 +1,4 @@
-package eu.webdude.movies.integration.route.imdb;
+package eu.webdude.movies.integration.imdbimport.route;
 
 import eu.webdude.movies.integration.aggregator.ArrayListAggregationStrategy;
 import org.apache.camel.Processor;
