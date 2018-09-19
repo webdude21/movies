@@ -11,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@ImdbImportRouteMetaInformation(
+	sourceComponent = "direct:import-people",
+	downloadFileName = "name.basics.tsv.gz",
+	destinationBean = "nameImportService"
+)
 public class PeopleImportRoute extends ImdbImportRoute {
 
 	private Logger logger = LoggerFactory.getLogger(PeopleImportRoute.class);
@@ -26,22 +31,7 @@ public class PeopleImportRoute extends ImdbImportRoute {
 	}
 
 	@Override
-	String getDownloadFileName() {
-		return "name.basics.tsv.gz";
-	}
-
-	@Override
-	String getSourceComponent() {
-		return "direct:import-data";
-	}
-
-	@Override
-	String getDestinationBean() {
-		return "nameImportService";
-	}
-
-	@Override
-	DataFormat getOutputFormat() {
+	public DataFormat getOutputFormat() {
 		return new BindyCsvDataFormat(PersonInfoDTO.class);
 	}
 

@@ -13,13 +13,10 @@ public abstract class ImdbImportRoute extends RouteBuilder {
 
 	private static final String BASE_DOWNLOAD_URI = "http4://datasets.imdbws.com/";
 
-	abstract String getDownloadFileName();
+	public abstract DataFormat getOutputFormat();
 
-	abstract String getSourceComponent();
-
-	abstract String getDestinationBean();
-
-	abstract DataFormat getOutputFormat();
+	private final ImdbImportRouteMetaInformation routeMetaInfo =
+		this.getClass().getAnnotationsByType(ImdbImportRouteMetaInformation.class)[0];
 
 	Processor preImportHook() {
 		return exchange -> logger.info("Running pre import hook!");
@@ -30,10 +27,10 @@ public abstract class ImdbImportRoute extends RouteBuilder {
 		var newLine = "\n";
 		var bindyFormat = getOutputFormat();
 		var aggregationStrategy = new ArrayListAggregationStrategy();
-		var downloadFileName = getDownloadFileName();
+		var downloadFileName = routeMetaInfo.downloadFileName();
 		var isNotHeader = simple("${property.CamelSplitIndex} > 0");
 
-		from(getSourceComponent())
+		from(routeMetaInfo.sourceComponent())
 			.log("Import data from IMDB. Using file " + downloadFileName)
 			.to(BASE_DOWNLOAD_URI + downloadFileName)
 			.log("File " + downloadFileName + " downloaded")
@@ -45,6 +42,6 @@ public abstract class ImdbImportRoute extends RouteBuilder {
 			.when(isNotHeader)
 			.unmarshal(bindyFormat)
 			.aggregate(constant(true), aggregationStrategy).completionSize(1000).completionTimeout(2000)
-			.bean(getDestinationBean());
+			.bean(routeMetaInfo.destinationBean());
 	}
 }
