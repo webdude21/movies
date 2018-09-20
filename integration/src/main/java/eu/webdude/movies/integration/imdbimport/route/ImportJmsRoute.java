@@ -13,10 +13,10 @@ public class ImportJmsRoute extends RouteBuilder {
 			.log("Import command received")
 			.process(exchange -> exchange.getIn().setBody(null))
 			.multicast().parallelProcessing()
-			.to(getMulticastRoutes());
+			.to(getImdbImportRoutes());
 	}
 
-	private String[] getMulticastRoutes() {
+	private String[] getImdbImportRoutes() {
 		var reflections = new Reflections("eu.webdude.movies.integration.imdbimport.route");
 
 		return reflections.getTypesAnnotatedWith(ImdbImportRouteMetaInformation.class)
