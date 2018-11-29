@@ -4,8 +4,14 @@ import org.apache.camel.builder.RouteBuilder;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 @Component
 public class ImportJmsRoute extends RouteBuilder {
+
+	public static final String IMPORT_ROUTE_PACKAGE = "eu.webdude.movies.integration.imdbimport.route";
+	private final Class<ImdbImportRouteMetaInformation> routeMetaInfoClass = ImdbImportRouteMetaInformation.class;
 
 	@Override
 	public void configure() {
@@ -17,15 +23,18 @@ public class ImportJmsRoute extends RouteBuilder {
 	}
 
 	private String[] getImdbImportRoutes() {
-		var reflections = new Reflections("eu.webdude.movies.integration.imdbimport.route");
+		var reflections = new Reflections(IMPORT_ROUTE_PACKAGE);
 
-		return reflections.getTypesAnnotatedWith(ImdbImportRouteMetaInformation.class)
+		return reflections.getTypesAnnotatedWith(routeMetaInfoClass)
 			.stream()
 			.map(this::extractSourceComponent)
+			.flatMap(Optional::stream)
 			.toArray(String[]::new);
 	}
 
-	private String extractSourceComponent(Class<?> importRoute) {
-		return importRoute.getDeclaredAnnotationsByType(ImdbImportRouteMetaInformation.class)[0].sourceComponent();
+	private Optional<String> extractSourceComponent(Class<?> importRoute) {
+		return Stream.of(importRoute.getDeclaredAnnotationsByType(routeMetaInfoClass))
+			.findAny()
+			.map(ImdbImportRouteMetaInformation::sourceComponent);
 	}
 }
