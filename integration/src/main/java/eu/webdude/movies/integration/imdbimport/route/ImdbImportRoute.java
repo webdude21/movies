@@ -9,18 +9,14 @@ import org.slf4j.LoggerFactory;
 
 public abstract class ImdbImportRoute extends RouteBuilder {
 
-	private Logger logger = LoggerFactory.getLogger(ImportJmsRoute.class);
-
 	private static final String BASE_DOWNLOAD_URI = "http4://datasets.imdbws.com/";
-
-	public abstract DataFormat getOutputFormat();
 
 	private final ImdbImportRouteMetaInformation routeMetaInfo =
 		this.getClass().getAnnotationsByType(ImdbImportRouteMetaInformation.class)[0];
 
-	Processor preImportHook() {
-		return exchange -> logger.info("Running pre import hook!");
-	}
+	private Logger logger = LoggerFactory.getLogger(ImportJmsRoute.class);
+
+	public abstract DataFormat getOutputFormat();
 
 	@Override
 	public void configure() {
@@ -43,5 +39,9 @@ public abstract class ImdbImportRoute extends RouteBuilder {
 			.unmarshal(bindyFormat)
 			.aggregate(constant(true), aggregationStrategy).completionSize(1000).completionTimeout(2000)
 			.bean(routeMetaInfo.destinationBean());
+	}
+
+	Processor preImportHook() {
+		return exchange -> logger.info("Running pre import hook!");
 	}
 }

@@ -1,5 +1,8 @@
 package eu.webdude.movies.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -74,5 +77,26 @@ public class Person extends RemoteReferencedModel {
 	public void setId(Long id) {
 		this.id = id;
 	}
-}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+
+		if (!(o instanceof Person)) return false;
+
+		Person person = (Person) o;
+
+		return new EqualsBuilder()
+			.append(getId(), person.getId())
+			.append(getFullName(), person.getFullName())
+			.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 37)
+			.append(getId())
+			.append(getFullName())
+			.toHashCode();
+	}
+}

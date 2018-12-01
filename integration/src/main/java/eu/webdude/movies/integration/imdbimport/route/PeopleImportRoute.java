@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
 )
 public class PeopleImportRoute extends ImdbImportRoute {
 
-	private Logger logger = LoggerFactory.getLogger(PeopleImportRoute.class);
-
 	private final Processor processor;
+
+	private Logger logger = LoggerFactory.getLogger(PeopleImportRoute.class);
 
 	@Autowired
 	public PeopleImportRoute(PersonRepository repository) {

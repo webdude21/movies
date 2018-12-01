@@ -40,19 +40,19 @@ public abstract class BaseModel implements Serializable {
 		preSaveImpl();
 	}
 
-	protected void preSaveImpl() {
-		LocalDateTime now = LocalDateTime.now();
-		if (getCreatedAt() == null) {
-			setCreatedAt(now);
-		}
-		setUpdatedAt(now);
-	}
-
 	public Long getVersion() {
 		return version;
 	}
 
 	private void setVersion(Long version) {
 		this.version = version;
+	}
+
+	protected void preSaveImpl() {
+		LocalDateTime now = LocalDateTime.now();
+		if (getCreatedAt() == null) {
+			setCreatedAt(now);
+		}
+		setUpdatedAt(now);
 	}
 }
